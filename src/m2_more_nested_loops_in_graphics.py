@@ -3,8 +3,8 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Geoffrey Cohen.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -29,6 +29,21 @@ def run_test_draw_upside_down_wall():
 
 
 def draw_upside_down_wall(rectangle, n, window):
+
+    rectangle.attach_to(window)
+    window.render()
+    for k in range(n):
+        for j in range(n-k):
+            newx1= rectangle.get_upper_right_corner().x-rectangle.get_width()/2*j+rectangle.get_width()/2*(k)
+            newy1= rectangle.get_upper_right_corner().y-rectangle.get_height()*j-rectangle.get_height()*k
+            newx2= rectangle.get_lower_left_corner().x-rectangle.get_width()/2*j+rectangle.get_width()/2*(k)
+            newy2= rectangle.get_lower_left_corner().y-rectangle.get_height()*j-rectangle.get_height()*k
+            newpoint1 = rg.Point(newx1,newy1)
+            newpoint2 = rg.Point(newx2,newy2)
+            newrect = rg.Rectangle(newpoint1,newpoint2)
+            newrect.attach_to(window)
+            window.render(0.1)
+
     """
     See   MoreWalls.pdf   in this project for pictures that may
     help you better understand the following specification:
@@ -49,7 +64,7 @@ def draw_upside_down_wall(rectangle, n, window):
     and n is nonnegative.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     Some tests are already written for you (above).
     # ------------------------------------------------------------------
 
